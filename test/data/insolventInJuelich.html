@@ -1,0 +1,736 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<head>
+    <title>Justizportal - Insolvenzbekanntmachungen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta content="Insolvenzbekanntmachungen des Bundes und der Länder" name="DC.Description"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="robots" content="noarchive"/>
+
+    <link href="mailto:redaktion@justiz.de" title="Mail" rel="author"/>
+    <link href="http://www.justiz.de/Uebersicht.php" title="Inhaltsverzeichnis" rel="contents"/>
+    <link href="http://www.justiz.de/index.php" title="Startseite" rel="start"/>
+    <link href="http://www.justiz.de/Impressum.php" title="Impressum" rel="copyright"/>
+    <link href="http://www.justiz.de/index.php#suchzeile" title="Suchen" rel="search"/>
+    <link href="https://www.insolvenzbekanntmachungen.de/css/basis.css" title="Basis-Stylesheet" type="text/css"
+          rel="stylesheet"/>
+
+    <!meta http-equiv="cache-control" content="no-cache">
+    <!meta http-equiv="pragma" content="no-cache">
+    <!meta http-equiv="expires" content="0">
+
+    <script>
+        var BundeslandArray = new Array(17);
+        BundeslandArray["-- Alle Bundesländer --"] = new Array("-- Alle Insolvenzgerichte --");
+        BundeslandArray["Baden-Württemberg"] = new Array("Aalen", "Baden-Baden", "Crailsheim", "Esslingen", "Freiburg", "Göppingen", "Hechingen", "Heidelberg", "Heilbronn", "Karlsruhe", "Konstanz", "Ludwigsburg", "Lörrach", "Mannheim", "Mosbach", "Offenburg", "Pforzheim", "Ravensburg", "Rottweil", "Stuttgart", "Tübingen", "Ulm", "Villingen-Schwenningen", "Waldshut-Tiengen");
+        BundeslandArray["Bayern"] = new Array("Amberg", "Ansbach", "Aschaffenburg", "Augsburg", "Bamberg", "Bayreuth", "Coburg", "Deggendorf", "Fürth", "Hof", "Ingolstadt", "Kempten", "Landshut", "Memmingen", "Mühldorf", "München", "Neu-Ulm", "Nördlingen", "Nürnberg", "Passau", "Regensburg", "Rosenheim", "Schweinfurt", "Straubing", "Traunstein", "Weiden", "Weilheim", "Wolfratshausen", "Würzburg");
+        BundeslandArray["Berlin"] = new Array("Charlottenburg", "Hohenschönhausen", "Köpenick", "Lichtenberg", "Mitte", "Neukölln", "Pankow/Weißensee", "Schöneberg", "Spandau", "Tempelhof-Kreuzberg", "Tiergarten", "Wedding");
+        BundeslandArray["Brandenburg"] = new Array("Cottbus", "Frankfurt/Oder", "Neuruppin", "Potsdam");
+        BundeslandArray["Bremen"] = new Array("Bremen", "Bremerhaven");
+        BundeslandArray["Hamburg"] = new Array("Hamburg");
+        BundeslandArray["Hessen"] = new Array("Bad Hersfeld", "Bad Homburg", "Darmstadt", "Eschwege", "Frankfurt", "Friedberg", "Fritzlar", "Fulda", "Gießen", "Hanau", "Kassel", "Korbach", "Königstein", "Limburg", "Marburg", "Offenbach", "Wetzlar", "Wiesbaden");
+        BundeslandArray["Mecklenburg-Vorpommern"] = new Array("Neubrandenburg", "Rostock", "Schwerin", "Stralsund");
+        BundeslandArray["Niedersachsen"] = new Array("Aurich", "Bersenbrück", "Braunschweig", "Bückeburg", "Celle", "Cloppenburg", "Cuxhaven", "Delmenhorst", "Gifhorn", "Goslar", "Göttingen", "Hameln", "Hannover", "Hildesheim", "Holzminden", "Leer", "Lingen", "Lüneburg", "Meppen", "Nordenham", "Nordhorn", "Oldenburg", "Osnabrück", "Osterode", "Stade", "Syke", "Tostedt", "Uelzen", "Vechta", "Verden", "Walsrode", "Wilhelmshaven", "Wolfsburg");
+        BundeslandArray["Nordrhein-Westfalen"] = new Array("Aachen", "Arnsberg", "Bielefeld", "Bochum", "Bonn", "Detmold", "Dortmund", "Duisburg", "Düsseldorf", "Essen", "Hagen", "Kleve", "Krefeld", "Köln", "Mönchengladbach", "Münster", "Paderborn", "Siegen", "Wuppertal");
+        BundeslandArray["Rheinland-Pfalz"] = new Array("Alzey", "Bad Kreuznach", "Bad Neuenahr-Ahrweiler", "Betzdorf", "Bingen am Rhein", "Bitburg", "Cochem", "Idar-Oberstein", "Kaiserslautern", "Koblenz", "Landau in der Pfalz", "Ludwigshafen am Rhein", "Mainz", "Mayen", "Montabaur", "Neustadt an der Weinstraße", "Neuwied", "Pirmasens", "Trier", "Wittlich", "Worms", "Zweibrücken");
+        BundeslandArray["Saarland"] = new Array("Saarbrücken");
+        BundeslandArray["Sachsen"] = new Array("Chemnitz", "Dresden", "Leipzig");
+        BundeslandArray["Sachsen-Anhalt"] = new Array("Dessau-Roßlau", "Halle (Saale)", "Magdeburg", "Stendal");
+        BundeslandArray["Schleswig-Holstein"] = new Array("Eutin", "Flensburg", "Husum", "Itzehoe", "Kiel", "Lübeck", "Meldorf", "Neumünster", "Niebüll", "Norderstedt", "Pinneberg", "Reinbek", "Schwarzenbek");
+        BundeslandArray["Thüringen"] = new Array("Erfurt", "Gera", "Meiningen", "Mühlhausen");
+
+        var RegisterArray = new Array(6);
+        RegisterArray["-- keine Angabe --"] = new Array("-- keine Angabe --", "Aachen", "Aalen", "Achern", "Adelsheim", "Ahaus", "Ahlen", "Albstadt", "Altena", "Altenburg", "Amberg", "Anklam", "Annaberg", "Ansbach", "Apolda", "Arnsberg", "Arnstadt", "Artern", "Aschaffenburg", "Aschersleben", "Aue", "Auerbach", "Augsburg", "Aurich", "Backnang", "Bad Berleburg", "Bad Doberan", "Bad Hersfeld", "Bad Homburg v. d. Höhe", "Bad Kreuznach", "Bad Langensalza", "Bad Lobenstein", "Bad Mergentheim", "Bad Oeynhausen", "Bad Säckingen", "Bad Salzungen", "Bad Urach", "Bad Waldsee", "Baden-Baden", "Balingen", "Bamberg", "Bautzen", "Bayreuth", "Beckum", "Bergen", "Bergheim", "Bergisch Gladbach", "Berlin-Charlottenburg", "Bernburg", "Besigheim", "Biberach", "Bielefeld", "Bitterfeld", "Blomberg", "Böblingen", "Bocholt", "Bochum", "Bonn", "Borken", "Borna", "Bottrop", "Brackenheim", "Brakel", "Braunschweig", "Breisach", "Bremen", "Bremerhaven", "Bretten", "Brilon", "Bruchsal", "Brühl", "Buchen", "Bühl", "Bünde", "Burg", "Calw", "Castrop-Rauxel", "Chemnitz", "Coburg", "Coesfeld", "Cottbus", "Crailsheim", "Darmstadt", "Deggendorf", "Delbrück", "Demmin", "Dessau-Roßlau", "Detmold", "Dinslaken", "Dippoldiswalde", "Döbeln", "Donaueschingen", "Dorsten", "Dortmund", "Dresden", "Duisburg", "Duisburg-Hamborn", "Duisburg-Ruhrort", "Dülmen", "Düren", "Düsseldorf", "Ehingen", "Eilenburg", "Eisenach", "Eisleben", "Ellwangen", "Emmendingen", "Emmerich", "Erfurt", "Erkelenz", "Eschwege", "Eschwege", "Eschweiler", "Essen", "Essen-Borbeck", "Essen-Steele", "Esslingen", "Ettenheim", "Ettlingen", "Euskirchen", "Flensburg", "Frankfurt (Oder)", "Frankfurt am Main", "Freiberg", "Freiburg", "Freudenstadt", "Friedberg (Hessen)", "Fritzlar", "Fulda", "Fürth", "Gardelegen", "Geilenkirchen", "Geislingen", "Geldern", "Gelsenkirchen", "Gelsenkirchen-Buer", "Gengenbach", "Gera", "Gernsbach", "Gießen", "Gladbeck", "Göppingen", "Görlitz", "Gotha", "Göttingen", "Greifswald", "Greiz", "Grevenbroich", "Grevesmühlen", "Grimma", "Gronau", "Gummersbach", "Güstrow", "Gütersloh", "Hagen", "Hagenow", "Hainichen", "Halberstadt", "Haldensleben", "Halle", "Halle (Saale)", "Hamburg", "Hamm", "Hanau", "Hannover", "Hattingen", "Hechingen", "Heidelberg", "Heidenheim", "Heilbronn", "Heiligenstadt", "Heinsberg", "Herford", "Herne", "Herne-Wanne", "Hettstedt", "Hildburghausen", "Hildesheim", "Hochenstein-Ernsttal", "Hof", "Homburg", "Horb", "Höxter", "Hoyerswerda", "Ibbenbüren", "Ilmenau", "Ingolstadt", "Iserlohn", "Jena", "Jülich", "Kaiserslautern", "Kamen", "Kamenz", "Karlsruhe", "Karlsruhe-Durlach", "Kassel", "Kehl", "Kempen", "Kempten", "Kenzingen", "Kerpen", "Kiel", "Kirchheim/Teck", "Kleve", "Koblenz", "Köln", "Königstein", "Königswinter", "Konstanz", "Korbach", "Köthen", "Krefeld", "Künzelsau", "Lahr", "Landau in der Pfalz", "Landshut", "Langenburg", "Langenfeld", "Lebach", "Leipzig", "Lemgo", "Lennestadt", "Leonberg", "Leutkirch", "Leverkusen", "Limburg a. d. Lahn", "Lippstadt", "Löbau", "Lörrach", "Lübbecke", "Lübeck", "Lüdenscheid", "Lüdinghausen", "Ludwigsburg", "Ludwigshafen am Rhein", "Ludwigslust", "Lüneburg", "Lünen", "Magdeburg", "Mainz", "Mannheim", "Marbach", "Marburg", "Marienberg", "Marl", "Marsberg", "Maulbronn", "Medebach", "Meinerzhagen", "Meiningen", "Meißen", "Memmingen", "Menden", "Merseburg", "Merzig", "Meschede", "Mettmann", "Minden", "Moers", "Mönchengladbach", "Mönchengladbach-Rheydt", "Monschau", "Montabaur", "Mosbach", "Mühlhausen", "Mülheim an der Ruhr", "Müllheim", "München", "Münsingen", "Münster", "Nagold", "Naumburg", "Neresheim", "Nettetal", "Neubrandenburg", "Neunkirchen", "Neuruppin", "Neuss", "Neustrelitz", "Nordhausen", "Nürnberg", "Nürtingen", "Oberhausen", "Oberkirch", "Oberndorf", "Offenbach am Main", "Offenburg", "Öhringen", "Oldenburg", "Olpe", "Oschatz", "Oschersleben", "Osnabrück", "Osterburg", "Ottweiler", "Paderborn", "Parchim", "Pasewalk", "Passau", "Pforzheim", "Philippsburg", "Pinneberg", "Pirna", "Plauen", "Plettenberg", "Pößneck", "Potsdam", "Quedlinburg", "Radolfzell", "Rahden", "Rastatt", "Ratingen", "Ravensburg", "Recklinghausen", "Regensburg", "Remscheid", "Reutlingen", "Rheda-Wiedenbrück", "Rheinbach", "Rheinberg", "Rheine", "Ribnitz-Damgarten", "Riedlingen", "Riesa", "Rostock", "Rottenburg", "Rottweil", "Rudolstadt", "Saalfeld", "Saarbrücken", "Salzwedel", "Sangerhausen", "Saulgau", "Schleiden", "Schmallenberg", "Schönau", "Schönebeck", "Schopfheim", "Schorndorf", "Schwäb. Gmünd", "Schwäbisch Hall", "Schweinfurt", "Schwelm", "Schwerin", "Schwerte", "Schwetzingen", "Siegburg", "Siegen", "Sigmaringen", "Singen", "Sinsheim", "Soest", "Solingen", "Sömmerda", "Sondershausen", "Sonneberg", "Spaichingen", "St. Blasien", "Stadthagen", "Stadtroda", "Staufen", "Steinfurt", "Stendal", "Stockach", "Stolberg", "Stralsund", "Straubing", "Stuttgart", "Suhl", "Tauberbischofsheim", "Tecklenburg", "Tettnang", "Titisee-Neustadt", "Torgau", "Tostedt", "Traunstein", "Tübingen", "Tuttlingen", "Uberlingen", "Ueckermünde", "Ulm", "Unna", "Vaihingen/Enz", "Velbert", "Viersen", "Villingen-Schwenningen", "Waiblingen", "Waldbröl", "Waldkirch", "Waldshut-Tiengen", "Walsrode", "Wangen", "Warburg", "Waren", "Warendorf", "Warstein", "Weiden i.d. OPf.", "Weimar", "Weinheim an der Bergstraße", "Weißenfels", "Weißwasser", "Werl", "Wermelskirchen", "Wernigerode", "Wertheim", "Wesel", "Wetter", "Wetzlar", "Wiesbaden", "Wiesloch", "Wipperfürth", "Wismar", "Witten", "Wittenberg", "Wittlich", "Wolfach", "Wolgast", "Worbis", "Wuppertal", "Würzburg", "Zeitz", "Zerbst", "Zittau", "Zweibrücken", "Zwickau");
+        RegisterArray["GnR"] = new Array("-- keine Angabe --", "Aachen", "Amberg", "Ansbach", "Arnsberg", "Aschaffenburg", "Augsburg", "Aurich", "Bad Hersfeld", "Bad Homburg v. d. Höhe", "Bad Kreuznach", "Bad Oeynhausen", "Bamberg", "Bayreuth", "Berlin-Charlottenburg", "Bielefeld", "Bochum", "Bonn", "Braunschweig", "Bremen", "Bremerhaven", "Chemnitz", "Coburg", "Coesfeld", "Cottbus", "Darmstadt", "Deggendorf", "Dortmund", "Dresden", "Duisburg", "Düren", "Düsseldorf", "Eschwege", "Essen", "Flensburg", "Frankfurt (Oder)", "Frankfurt am Main", "Freiburg", "Friedberg (Hessen)", "Fritzlar", "Fulda", "Fürth", "Gelsenkirchen", "Gießen", "Göttingen", "Gütersloh", "Hagen", "Hamburg", "Hamm", "Hanau", "Hannover", "Hildesheim", "Hof", "Ingolstadt", "Iserlohn", "Jena", "Kaiserslautern", "Kassel", "Kempten", "Kiel", "Kleve", "Koblenz", "Köln", "Königstein", "Korbach", "Krefeld", "Landau in der Pfalz", "Landshut", "Leipzig", "Lemgo", "Limburg a. d. Lahn", "Lübeck", "Ludwigshafen am Rhein", "Lüneburg", "Mainz", "Mannheim", "Marburg", "Memmingen", "Mönchengladbach", "Montabaur", "München", "Münster", "Neubrandenburg", "Neuruppin", "Neuss", "Nürnberg", "Offenbach am Main", "Oldenburg", "Osnabrück", "Paderborn", "Passau", "Pinneberg", "Potsdam", "Recklinghausen", "Regensburg", "Rostock", "Saarbrücken", "Schweinfurt", "Schwerin", "Siegburg", "Siegen", "Stadthagen", "Steinfurt", "Stendal", "Stralsund", "Straubing", "Stuttgart", "Tostedt", "Traunstein", "Ulm", "Walsrode", "Weiden i.d. OPf.", "Wetzlar", "Wiesbaden", "Wittlich", "Wuppertal", "Würzburg", "Zweibrücken");
+        RegisterArray["HRA"] = new Array("-- keine Angabe --", "Aachen", "Amberg", "Ansbach", "Arnsberg", "Aschaffenburg", "Augsburg", "Aurich", "Bad Hersfeld", "Bad Homburg v. d. Höhe", "Bad Kreuznach", "Bad Oeynhausen", "Bamberg", "Bayreuth", "Berlin-Charlottenburg", "Bielefeld", "Bochum", "Bonn", "Braunschweig", "Bremen", "Bremerhaven", "Chemnitz", "Coburg", "Coesfeld", "Cottbus", "Darmstadt", "Deggendorf", "Dortmund", "Dresden", "Duisburg", "Düren", "Düsseldorf", "Eschwege", "Essen", "Flensburg", "Frankfurt (Oder)", "Frankfurt am Main", "Freiburg", "Friedberg (Hessen)", "Fritzlar", "Fulda", "Fürth", "Gelsenkirchen", "Gießen", "Göttingen", "Gütersloh", "Hagen", "Hamburg", "Hamm", "Hanau", "Hannover", "Hildesheim", "Hof", "Ingolstadt", "Iserlohn", "Jena", "Kaiserslautern", "Kassel", "Kempten", "Kiel", "Kleve", "Koblenz", "Köln", "Königstein", "Korbach", "Krefeld", "Landau in der Pfalz", "Landshut", "Leipzig", "Lemgo", "Limburg a. d. Lahn", "Lübeck", "Ludwigshafen am Rhein", "Lüneburg", "Mainz", "Mannheim", "Marburg", "Memmingen", "Mönchengladbach", "Montabaur", "München", "Münster", "Neubrandenburg", "Neuruppin", "Neuss", "Nürnberg", "Offenbach am Main", "Oldenburg", "Osnabrück", "Paderborn", "Passau", "Pinneberg", "Potsdam", "Recklinghausen", "Regensburg", "Rostock", "Saarbrücken", "Schweinfurt", "Schwerin", "Siegburg", "Siegen", "Stadthagen", "Steinfurt", "Stendal", "Stralsund", "Straubing", "Stuttgart", "Tostedt", "Traunstein", "Ulm", "Walsrode", "Weiden i.d. OPf.", "Wetzlar", "Wiesbaden", "Wittlich", "Wuppertal", "Würzburg", "Zweibrücken");
+        RegisterArray["HRB"] = new Array("-- keine Angabe --", "Aachen", "Amberg", "Ansbach", "Arnsberg", "Aschaffenburg", "Augsburg", "Aurich", "Bad Hersfeld", "Bad Homburg v. d. Höhe", "Bad Kreuznach", "Bad Oeynhausen", "Bamberg", "Bayreuth", "Berlin-Charlottenburg", "Bielefeld", "Bochum", "Bonn", "Braunschweig", "Bremen", "Bremerhaven", "Chemnitz", "Coburg", "Coesfeld", "Cottbus", "Darmstadt", "Deggendorf", "Dortmund", "Dresden", "Duisburg", "Düren", "Düsseldorf", "Eschwege", "Essen", "Flensburg", "Frankfurt (Oder)", "Frankfurt am Main", "Freiburg", "Friedberg (Hessen)", "Fritzlar", "Fulda", "Fürth", "Gelsenkirchen", "Gießen", "Göttingen", "Gütersloh", "Hagen", "Hamburg", "Hamm", "Hanau", "Hannover", "Hildesheim", "Hof", "Ingolstadt", "Iserlohn", "Jena", "Kaiserslautern", "Kassel", "Kempten", "Kiel", "Kleve", "Koblenz", "Köln", "Königstein", "Korbach", "Krefeld", "Landau in der Pfalz", "Landshut", "Leipzig", "Lemgo", "Limburg a. d. Lahn", "Lübeck", "Ludwigshafen am Rhein", "Lüneburg", "Mainz", "Mannheim", "Marburg", "Memmingen", "Mönchengladbach", "Montabaur", "München", "Münster", "Neubrandenburg", "Neuruppin", "Neuss", "Nürnberg", "Offenbach am Main", "Oldenburg", "Osnabrück", "Paderborn", "Passau", "Pinneberg", "Potsdam", "Recklinghausen", "Regensburg", "Rostock", "Saarbrücken", "Schweinfurt", "Schwerin", "Siegburg", "Siegen", "Stadthagen", "Steinfurt", "Stendal", "Stralsund", "Straubing", "Stuttgart", "Tostedt", "Traunstein", "Ulm", "Walsrode", "Weiden i.d. OPf.", "Wetzlar", "Wiesbaden", "Wittlich", "Wuppertal", "Würzburg", "Zweibrücken");
+        RegisterArray["PR"] = new Array("-- keine Angabe --", "Amberg", "Ansbach", "Aschaffenburg", "Augsburg", "Bamberg", "Bayreuth", "Berlin-Charlottenburg", "Bremen", "Bremerhaven", "Chemnitz", "Coburg", "Cottbus", "Deggendorf", "Dresden", "Essen", "Frankfurt (Oder)", "Frankfurt am Main", "Freiburg", "Fürth", "Hamburg", "Hannover", "Hof", "Ingolstadt", "Jena", "Kempten", "Kiel", "Koblenz", "Landshut", "Leipzig", "Mannheim", "Memmingen", "München", "Neubrandenburg", "Neuruppin", "Nürnberg", "Passau", "Potsdam", "Regensburg", "Rostock", "Saarbrücken", "Schweinfurt", "Schwerin", "Stendal", "Stralsund", "Straubing", "Stuttgart", "Traunstein", "Ulm", "Weiden i.d. OPf.", "Würzburg", "Zweibrücken");
+        RegisterArray["VR"] = new Array("-- keine Angabe --", "Aachen", "Aalen", "Achern", "Adelsheim", "Ahaus", "Ahlen", "Albstadt", "Altena", "Altenburg", "Amberg", "Anklam", "Annaberg", "Ansbach", "Apolda", "Arnsberg", "Arnstadt", "Artern", "Aschaffenburg", "Aschersleben", "Aue", "Auerbach", "Augsburg", "Aurich", "Backnang", "Bad Berleburg", "Bad Doberan", "Bad Hersfeld", "Bad Homburg v. d. Höhe", "Bad Kreuznach", "Bad Langensalza", "Bad Lobenstein", "Bad Mergentheim", "Bad Oeynhausen", "Bad Säckingen", "Bad Salzungen", "Bad Urach", "Bad Waldsee", "Baden-Baden", "Balingen", "Bamberg", "Bautzen", "Bayreuth", "Beckum", "Bergen", "Bergheim", "Bergisch Gladbach", "Berlin-Charlottenburg", "Bernburg", "Besigheim", "Biberach", "Bielefeld", "Bitterfeld", "Blomberg", "Böblingen", "Bocholt", "Bochum", "Bonn", "Borken", "Borna", "Bottrop", "Brackenheim", "Brakel", "Braunschweig", "Breisach", "Bremen", "Bremerhaven", "Bretten", "Brilon", "Bruchsal", "Brühl", "Buchen", "Bühl", "Bünde", "Burg", "Calw", "Castrop-Rauxel", "Chemnitz", "Coburg", "Coesfeld", "Cottbus", "Crailsheim", "Darmstadt", "Deggendorf", "Delbrück", "Demmin", "Dessau-Roßlau", "Detmold", "Dinslaken", "Dippoldiswalde", "Döbeln", "Donaueschingen", "Dorsten", "Dortmund", "Dresden", "Duisburg", "Duisburg-Hamborn", "Duisburg-Ruhrort", "Dülmen", "Düren", "Düsseldorf", "Ehingen", "Eilenburg", "Eisenach", "Eisleben", "Ellwangen", "Emmendingen", "Emmerich", "Erfurt", "Erkelenz", "Eschwege", "Eschweiler", "Essen", "Essen-Borbeck", "Essen-Steele", "Esslingen", "Ettenheim", "Ettlingen", "Euskirchen", "Flensburg", "Frankfurt (Oder)", "Frankfurt am Main", "Freiberg", "Freiburg", "Freudenstadt", "Friedberg (Hessen)", "Fritzlar", "Fulda", "Fürth", "Gardelegen", "Geilenkirchen", "Geislingen", "Geldern", "Gelsenkirchen", "Gelsenkirchen-Buer", "Gengenbach", "Gera", "Gernsbach", "Gießen", "Gladbeck", "Göppingen", "Görlitz", "Gotha", "Göttingen", "Greifswald", "Greiz", "Grevenbroich", "Grevesmühlen", "Grimma", "Gronau", "Gummersbach", "Güstrow", "Gütersloh", "Hagen", "Hagenow", "Hainichen", "Halberstadt", "Haldensleben", "Halle", "Halle (Saale)", "Hamburg", "Hamm", "Hanau", "Hannover", "Hattingen", "Hechingen", "Heidelberg", "Heidenheim", "Heilbronn", "Heiligenstadt", "Heinsberg", "Herford", "Herne", "Herne-Wanne", "Hettstedt", "Hildburghausen", "Hildesheim", "Hochenstein-Ernsttal", "Hof", "Homburg", "Horb", "Höxter", "Hoyerswerda", "Ibbenbüren", "Ilmenau", "Ingolstadt", "Iserlohn", "Jena", "Jülich", "Kaiserslautern", "Kamen", "Kamenz", "Karlsruhe", "Karlsruhe-Durlach", "Kassel", "Kehl", "Kempen", "Kempten", "Kenzingen", "Kerpen", "Kiel", "Kirchheim/Teck", "Kleve", "Koblenz", "Köln", "Königstein", "Königswinter", "Konstanz", "Korbach", "Köthen", "Krefeld", "Künzelsau", "Lahr", "Landau in der Pfalz", "Landshut", "Langenburg", "Langenfeld", "Lebach", "Leipzig", "Lemgo", "Lennestadt", "Leonberg", "Leutkirch", "Leverkusen", "Limburg a. d. Lahn", "Lippstadt", "Löbau", "Lörrach", "Lübbecke", "Lübeck", "Lüdenscheid", "Lüdinghausen", "Ludwigsburg", "Ludwigshafen am Rhein", "Ludwigslust", "Lüneburg", "Lünen", "Magdeburg", "Mainz", "Mannheim", "Marbach", "Marburg ", "Marienberg", "Marl", "Marsberg", "Maulbronn", "Medebach", "Meinerzhagen", "Meiningen", "Meißen", "Memmingen", "Menden", "Merseburg", "Merzig", "Meschede", "Mettmann", "Minden", "Moers", "Mönchengladbach", "Mönchengladbach-Rheydt", "Monschau", "Montabaur", "Mosbach", "Mühlhausen", "Mülheim an der Ruhr", "Müllheim", "München", "Münsingen", "Münster", "Nagold", "Naumburg", "Neresheim", "Nettetal", "Neubrandenburg", "Neunkirchen", "Neuruppin", "Neuss", "Neustrelitz", "Nordhausen", "Nürnberg", "Nürtingen", "Oberhausen", "Oberkirch", "Oberndorf", "Offenbach am Main", "Offenburg", "Öhringen", "Oldenburg", "Olpe", "Oschatz", "Oschersleben", "Osnabrück", "Osterburg", "Ottweiler", "Paderborn", "Parchim", "Pasewalk", "Passau", "Pforzheim", "Philippsburg", "Pinneberg", "Pirna", "Plauen", "Plettenberg", "Pößneck", "Potsdam", "Quedlinburg", "Radolfzell", "Rahden", "Rastatt", "Ratingen", "Ravensburg", "Recklinghausen", "Regensburg", "Remscheid", "Reutlingen", "Rheda-Wiedenbrück", "Rheinbach", "Rheinberg", "Rheine", "Ribnitz-Damgarten", "Riedlingen", "Riesa", "Rostock", "Rottenburg", "Rottweil", "Rudolstadt", "Saalfeld", "Saarbrücken", "Salzwedel", "Sangerhausen", "Saulgau", "Schleiden", "Schmallenberg", "Schönau", "Schönebeck", "Schopfheim", "Schorndorf", "Schwäb. Gmünd", "Schwäbisch Hall", "Schweinfurt", "Schwelm", "Schwerin", "Schwerte", "Schwetzingen", "Siegburg", "Siegen", "Sigmaringen", "Singen", "Sinsheim", "Soest", "Solingen", "Sömmerda", "Sondershausen", "Sonneberg", "Spaichingen", "St. Blasien", "Stadthagen", "Stadtroda", "Staufen", "Steinfurt", "Stendal", "Stockach", "Stolberg", "Stralsund", "Straubing", "Stuttgart", "Suhl", "Tauberbischofsheim", "Tecklenburg", "Tettnang", "Titisee-Neustadt", "Torgau", "Tostedt", "Traunstein", "Tübingen", "Tuttlingen", "Uberlingen", "Ueckermünde", "Ulm", "Unna", "Vaihingen/Enz", "Velbert", "Viersen", "Villingen-Schwenningen", "Waiblingen", "Waldbröl", "Waldkirch", "Waldshut-Tiengen", "Walsrode", "Wangen", "Warburg", "Waren", "Warendorf", "Warstein", "Weiden i.d. OPf.", "Weimar", "Weinheim an der Bergstraße", "Weißenfels", "Weißwasser", "Werl", "Wermelskirchen", "Wernigerode", "Wertheim", "Wesel", "Wetter", "Wetzlar", "Wiesbaden", "Wiesloch", "Wipperfürth", "Wismar", "Witten", "Wittenberg", "Wittlich", "Wolfach", "Wolgast", "Worbis", "Wuppertal", "Würzburg", "Zeitz", "Zerbst", "Zittau", "Zweibrücken", "Zwickau");
+
+
+        function init() {
+            updateRegistergericht("", "1");
+            document.globe.Bundesland.selectedIndex = "0";
+            document.globe.Gericht.selectedIndex = "0";
+        }
+
+        function updateGericht(n) {
+            var Formularkopie = document.globe;
+            var arr = BundeslandArray[n];
+            var current = Formularkopie.Gericht.options.length;
+            for (var j = current; j > 0; j--) Formularkopie.Gericht.options[j] = null;
+
+            if (n != "-- Alle Bundesländer --") {
+                for (var i = 0; i < arr.length; i++) Formularkopie.Gericht.options[Formularkopie.Gericht.options.length] = new Option(arr[i], arr[i]);
+            }
+
+            Formularkopie.Gericht.options[0].text = "-- Alle Insolvenzgerichte --";
+        }
+
+        function updateRegistergericht(n, x) {
+            if (n == "") n = "-- keine Angabe --";
+
+            var Formularkopie = document.globe;
+            var arr = RegisterArray[n];
+            Formularkopie.Registergericht.options.length = 0;
+
+            for (var i = 0; i < arr.length; i++) {
+
+                if (arr[i] == "" && x == "1")
+                    Formularkopie.Registergericht.options[Formularkopie.Registergericht.options.length] = new Option(arr[i], arr[i], false, true);
+                else Formularkopie.Registergericht.options[Formularkopie.Registergericht.options.length] = new Option(arr[i], arr[i]);
+            }
+
+        }
+
+        function set_registergericht() {
+            for (var i = 0; i < document.globe.Registergericht.length; i++)
+                if (document.globe.Registergericht.options[i].text.toUpperCase().search(document.globe.select_registergericht.value.toUpperCase()) == 0) {
+                    document.globe.Registergericht.options[i].selected = true;
+                    break;
+                }
+        }
+
+        function validate_globe(theForm) {
+            var checkOK = "0123456789-.";
+            var checkStr = theForm.Datum1.value;
+            var allValid = true;
+            for (i = 0; i < checkStr.length; i++) {
+                ch = checkStr.charAt(i);
+                for (j = 0; j < checkOK.length; j++)
+                    if (ch == checkOK.charAt(j))
+                        break;
+                if (j == checkOK.length) {
+                    allValid = false;
+                    break;
+                }
+            }
+            if (!allValid) {
+                alert("Geben Sie nur Ziffern und \".\"-Zeichen in das Feld \"Datum1\" ein.");
+                theForm.Datum1.focus();
+                return (false);
+            }
+
+            var checkOK = "0123456789-.";
+            var checkStr = theForm.Datum2.value;
+            var allValid = true;
+            for (i = 0; i < checkStr.length; i++) {
+                ch = checkStr.charAt(i);
+                for (j = 0; j < checkOK.length; j++)
+                    if (ch == checkOK.charAt(j))
+                        break;
+                if (j == checkOK.length) {
+                    allValid = false;
+                    break;
+                }
+            }
+            if (!allValid) {
+                alert("Geben Sie nur Ziffern und \".\"-Zeichen in das Feld \"Datum2\" ein.");
+                theForm.Datum2.focus();
+                return (false);
+            }
+
+            var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz????????ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ0123456789-*\"\"!?@?,.:§0&+#<>/()[]=àèûô \t\r\n\f";
+            var checkStr = theForm.Name.value;
+            var allValid = true;
+            for (i = 0; i < checkStr.length; i++) {
+                ch = checkStr.charAt(i);
+                for (j = 0; j < checkOK.length; j++)
+                    if (ch == checkOK.charAt(j))
+                        break;
+                if (j == checkOK.length) {
+                    allValid = false;
+                    break;
+                }
+            }
+            if (!allValid) {
+                alert("Geben Sie nur Buchstaben, Ziffern, Leerräume und \"*\"\"!?@?,.:§0&+#<>/()[]=àèûô\"-Zeichen in das Feld \"Name\" ein.");
+                theForm.Name.focus();
+                return (false);
+            }
+
+            var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz????????ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ/()0123456789-*\"\"!?@? \t\r\n\f";
+            var checkStr = theForm.Sitz.value;
+            var allValid = true;
+            for (i = 0; i < checkStr.length; i++) {
+                ch = checkStr.charAt(i);
+                for (j = 0; j < checkOK.length; j++)
+                    if (ch == checkOK.charAt(j))
+                        break;
+                if (j == checkOK.length) {
+                    allValid = false;
+                    break;
+                }
+            }
+            if (!allValid) {
+                alert("Geben Sie nur Buchstaben, Ziffern, Leerräume und \"*\"\"!?@?\"-Zeichen in das Feld \"Sitz\" ein.");
+                theForm.Sitz.focus();
+                return (false);
+            }
+            if (theForm.Absenden.value == "Suche starten") {
+                theForm.page.value = "1";
+            }
+            Fensteroptionen = "location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,top=0,left=0,height=" + screen.height + ",width=" + screen.width;
+            MeinFenster = window.open("", "Ergebnisfenster", Fensteroptionen);
+            MeinFenster.focus();
+            return (true);
+        }
+
+    </script>
+</head>
+
+<body onLoad="javascript:init()" BGCOLOR="#FFFFFF" marginwidth="0" marginheight="0" topmargin="0" leftmargin="0">
+<!-- Kopfbereich -->
+<a name="top"></a>
+<a href="http://www.justiz.de/" title="Link zur Startseite"><img src="../test/inso_justizportal/css/justitia.gif"
+                                                                 alt="Justitia auf Deutschlandkarte" id="logo"
+                                                                 height="132"
+
+                                                                 width="160"></a>
+<h1 id="kopf">Insolvenzbekanntmachungen</h1>
+<div id="micronavi">Sie sind hier:
+    <ul>
+        <li><a href="https://www.insolvenzbekanntmachungen.de/cgi-bin/bl_suche.pl"><span class="pfeil">&gt;</span>Bekanntmachungen
+            suchen</a></li>
+    </ul>
+</div>
+
+<!-- Ende Kopfbereich -->
+<div id="container"><!-- Container -->
+
+    <div id="navi"><!-- Navigation linke Seite -->
+        <ul class="hinterlegt">
+            <li><a href="bl_suche.pl" class="selected">Bekanntmachungen<br>suchen</a></li>
+            <li><a href="../hilfe.html">Hilfe zur Suche</a></li>
+            <li><a href="../fragen.html">H&auml;ufige Fragen</a></li>
+            <li><a href="../laenderuebersicht.html">L&auml;nder&uuml;bersicht</a></li>
+            <li><a href="../links.html">Links</a></li>
+        </ul>
+
+        <ul class="binnennavi">
+            <li><a href="../index.html" title="Startseite">Startseite</a></li>
+            <li><a href="../impressum.html">Impressum</a></li>
+            <li><a href="../hinweise.html">Rechtliche Hinweise</a></li>
+            <li><a href="../kontakt.html">Kontakt</a></li>
+
+        </ul>
+        <form action="http://www.justiz.de/suchergebnis/index.php" method="get"><label class="small"
+                                                                                       for="query">Suche</label><br>
+            <input name="q" id="suchzeile" type="text"><input src="../test/inso_justizportal/css/lupe.gif"
+                                                              alt="Suche starten" title="Suche starten" type="image">
+        </form>
+    </div> <!-- Ende Navigation -->
+
+    <div id="inhalt"><!-- Inhalt -->
+
+        <table width="588">
+            <tr>
+                <td>
+                    <a name="Start"></a>
+                    <h2 align="center">Insolvenzverfahren suchen</h2>
+
+                    <noscript>
+                        <p align="center"><b>Bitte aktivieren Sie Javascript in Ihrem Browser,<br>
+                            da ansonsten nur eine eingeschränkte Suchfunktionalität gegeben ist.</b>
+                        </p>
+                    </noscript>
+
+                    <center>
+                        <br>
+                        <table cellpadding="6">
+                            <tr>
+                                <td style="border-style: solid; border-width: 1">
+
+                                    <p align="center"><b>
+                                    <p align="center"><b>Es wurden 25 Treffer gefunden.<br><a href="#Ergebnis ">Dokument
+                                        1 - 25 von 25 &Uuml;bereinstimmungen anzeigen</a><br><a
+                                            href="javascript:window.print()">Suchergebnisse drucken</a></b></p>
+                                    </b></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+
+                </td>
+            </tr>
+        </table>
+
+        <!-- Start Tabellenrahmen -->
+        <table width="760" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td>
+                    <form name="globe" action="/cgi-bin/bl_suche.pl" method="post"
+                          onsubmit="return validate_globe(this)" target="Ergebnisfenster">
+
+                        <table border="0" width="588">
+                            <tr>
+                                <td width="40%" align="center" style="border-style: solid; border-width: 1">
+                                    <font face="Arial" size="4"><input type="radio" value="detail" name="Suchfunktion">&nbsp;Detail-Suche</font>
+                                </td>
+                                <td width="15%">&nbsp;</td>
+                                <td width="45%" align="center" style="border-style: solid; border-width: 1">
+                                    <font face="Arial" size="4"><input type="radio" value="uneingeschr" checked
+                                                                       name="Suchfunktion">&nbsp;Uneingeschränkte Suche</font>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="3"><br>
+                                    <p align="center"><input type="submit" class="submit" NAME="Absenden"
+                                                             value="Suche starten"><br><br></p></td>
+                            </tr>
+                        </table>
+
+
+                        <table border="0" width="588">
+                            <tr>
+                                <td width="171">Bundesl&auml;nder:</td>
+                                <td>
+                                    <select name="Bundesland" style="width:300"
+                                            onChange="javascript:updateGericht(this.value)">
+                                        <option value="-- Alle Bundesländer --" SELECTED>-- Alle Bundesländer --
+                                        </option>
+                                        <option value="Baden-Württemberg">Baden-Württemberg</option>
+                                        <option value="Bayern">Bayern</option>
+                                        <option value="Berlin">Berlin</option>
+                                        <option value="Brandenburg">Brandenburg</option>
+                                        <option value="Bremen">Bremen</option>
+                                        <option value="Hamburg">Hamburg</option>
+                                        <option value="Hessen">Hessen</option>
+                                        <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+                                        <option value="Niedersachsen">Niedersachsen</option>
+                                        <option value="Nordrhein-Westfalen">Nordrhein-Westfalen</option>
+                                        <option value="Rheinland-Pfalz">Rheinland-Pfalz</option>
+                                        <option value="Saarland">Saarland</option>
+                                        <option value="Sachsen">Sachsen</option>
+                                        <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
+                                        <option value="Schleswig-Holstein">Schleswig-Holstein</option>
+                                        <option value="Thüringen">Thüringen</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="171">Gericht:</td>
+                                <td>
+                                    <select name="Gericht" style="width:300">
+                                        <option value="-- Alle Insolvenzgerichte --" SELECTED>-- Alle Insolvenzgerichte
+                                            --
+                                        </option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class=form>Datum der Bekanntmachung</span></td>
+                                <td>von:&nbsp;<input type="text" name="Datum1" value=""
+                                    "size="10">&nbsp;bis:&nbsp;<input type="text" name="Datum2" value="" size="10"></td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Firma bzw. Familienname des Schuldners</span></td>
+                                <td><input type="text" name="Name" value="" size="43"></td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Sitz bzw. Wohnsitz des Schuldners</span></td>
+                                <td><input type="text" name="Sitz" value="Jülich" size="43"></td>
+                            </tr>
+
+                            <!--	    <tr>
+                                      <td width="171"><span class="form">AZ (nur zu Testzwecken)</span></td>
+                                      <td><input type="text" name="Aktenzeichen" value="" size="43"></td>
+                                    </tr>
+                            -->
+
+                            <tr>
+                                <td width="171"><span class="form">Aktenzeichen des Insolvenzgerichts</span></td>
+                                <td>
+                                    <input type="text" Name="Abteilungsnr" value="" size="5">
+
+                                    <select name="Registerzeichen" value="--" size="1">
+                                        <option value="--" SELECTED>--</option>
+                                        <option value="IN">IN</option>
+                                        <option value="IK">IK</option>
+                                        <option value="IE">IE</option>
+
+                                    </select>
+
+                                    <input type="text" name="Lfdnr" value="" size="4"> /
+                                    <select name="Jahreszahl" value="--" size="1">
+                                        <option value="--" SELECTED>--</option>
+                                        <option value="99">99</option>
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Registerart</span></td>
+                                <td>
+                                    <select name="Registerart"
+                                            onChange="javascript:updateRegistergericht(this.value,'0')" size="1"
+                                            value="">
+                                        <option value="-- keine Angabe --">-- keine Angabe --</option>
+                                        <option value="GnR">GnR</option>
+                                        <option value="HRA">HRA</option>
+                                        <option value="HRB">HRB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="VR">VR</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Registergericht</span></td>
+                                <td><input type="text" name="select_registergericht" onKeyUP="set_registergericht()">
+                                    <img src="../img/pfeil_schwarz.gif" alt="Pfeil nach rechts" align="absmiddle">
+                                    <select name="Registergericht" size="1"></select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Registernummer</span></td>
+                                <td><input type="text" name="Registernummer" value="" size="43"></td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Gegenstand der Bekanntmachung</span></td>
+                                <td>
+                                    <select size="1" name="Gegenstand">
+                                        <option value="-- Alle Bekanntmachungen innerhalb des Verfahrens --" SELECTED>--
+                                            Alle Bekanntmachungen innerhalb des Verfahrens --
+                                        </option>
+                                        <option value="Sicherungsmaßnahmen">Sicherungsmaßnahmen</option>
+                                        <option value="Eröffnungen">Eröffnungen</option>
+                                        <option value="Termine">Termine</option>
+                                        <option value="Entscheidungen im Verfahren">Entscheidungen im Verfahren</option>
+                                        <option value="Entscheidungen nach Aufhebung des Verfahrens">Entscheidungen nach
+                                            Aufhebung des Verfahrens
+                                        </option>
+                                        <option value="Sonstiges">Sonstiges</option>
+                                        <option value="Entscheidungen im Restschuldbefreiungsverfahren">Entscheidungen
+                                            im Restschuldbefreiungsverfahren
+                                        </option>
+                                        <option value="Verteilungsverzeichnisse (§ 188 InsO) d. Verw./Treuh.">
+                                            Verteilungsverzeichnisse (§ 188 InsO) d. Verw./Treuh.
+                                        </option>
+                                        <option value="Überwachte Insolvenzpläne">Überwachte Insolvenzpläne</option>
+                                        <option value="Abweisungen mangels Masse">Abweisungen mangels Masse</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="171"><span class="form">Anzahl Treffer pro Seite</span></td>
+                                <td>
+                                    <select name="matchesperpage" value="100" size="1">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="50">50</option>
+                                        <option value="100" SELECTED>100</option>
+
+                                    </select>
+
+                                    <input type="hidden" name="page" value="1">&nbsp;Sortiert nach&nbsp;
+
+                                    <select name="sortedby">
+                                        <option value="Aktenzeichen">Aktenzeichen</option>
+                                        <option value="Schuldner">Schuldner</option>
+                                        <option value="Datum" SELECTED>Datum</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table width="588">
+                            <tr>
+                                <td colspan="2">
+
+                                    <p><b>Eine uneingeschränkte Suche, "- Alle Insolvenzgerichte -",
+                                        nach Bekanntmachungen ist gemäß § 2 der Verordnung zu öffentlichen
+                                        Bekanntmachungen in Insolvenzverfahren im Internet nur innerhalb von zwei
+                                        Wochen nach dem ersten Tag der Veröffentlichung möglich. Nach Ablauf dieser
+                                        Frist ist nur eine
+                                        Detail-Suche zulässig. Anzugeben sind dabei der Sitz des Insolvenzgerichts
+                                        und mindestens eine der folgenden Angaben:<BR><BR>Familienname, Firma,
+                                        Sitz oder Wohnsitz des Schuldners, Aktenzeichen des Insolvenzgerichts oder das
+                                        Registergericht,
+                                        die Registerart und die Registernummer.<BR><BR>
+                                        Um ein optimales Antwortzeitverhalten zu erreichen wird empfohlen, die Suche
+                                        durch möglichst
+                                        genaue Suchkriterien einzuschränken.</b></p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <hr>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+                    <table>
+                        <tr>
+                            <td>
+                                <a name="Ergebnis"></a>
+                                <h2>Eingegebene Suchkriterien:</h2>
+                                <p><b>Uneingeschränkte Suche</b><br>
+                                    <b>Bundesland:</b> -- Alle Bundesländer --<br>
+                                    <b>Gericht:</b> -- Alle Insolvenzgerichte --<br>
+                                    <b>Sitz bzw. Wohnsitz des Schuldners:</b> Jülich<br>
+                                    <b>Gegenstand der Bekanntmachung:</b> -- Alle Bekanntmachungen innerhalb des
+                                    Verfahrens --<br>
+                                    <b>Anzahl Treffer pro Seite:</b> 100<br>
+                                    <b>Sortiert nach:</b> Datum<br>
+                                </p>
+                                <p align="center"><b>Es wurden 25 Treffer gefunden.<br>Dokument 1 - 25 von 25 &Uuml;bereinstimmungen<br><a
+                                        href="javascript:window.print()">Suchergebnisse drucken</a></b></p>
+                                <br>
+                                <h2>Gefundene Insolvenzverfahren:</h2><br>
+                                <script type="text/javascript">
+                                    <!--
+                                    function NeuFenster(Adresse) {
+                                        MeinFenster =
+                                            window.open(Adresse, "Zweitfenster", "location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,top=0,left=0");
+                                    }
+
+                                    //-->
+                                </script>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/11/0092_IK00219_11/2017_08_18__07_21_47_Restschuldbefreiung.htm')">2017-08-18
+                                            <ul>Konzelmann, Berthold, Jülich, 92 IK 219/11</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/be/agwedding/12/39_IK_53_12/2017_08_17__12_48_09_Termine.htm')">2017-08-17
+                                            <ul>Wolfgang Podolski, Jülicher Straße 6 a, 13357 Berlin, 39 IK 53/12</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/11/0092_IN00083_11/2017_08_16__07_47_01_Restschuldbefreiung.htm')">2017-08-16
+                                            <ul>Krieg, Manuela, Jülich, 92 IN 83/11</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/15/0093_IN00101_15/2017_08_15__10_05_57_Restschuldbefreiung.htm')">2017-08-15
+                                            <ul>Barisic-Jaman, Zeljko, Jülich, 93 IN 101/15</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/15/0093_IN00101_15/2017_08_15__10_05_49_Entscheidungen_im_Verfahren_Aufhebung_Einstellung.htm')">2017-08-15
+                                            <ul>Barisic-Jaman, Zeljko, Jülich, 93 IN 101/15</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/11/0091_IK00308_11/2017_08_14__11_03_55_Restschuldbefreiung.htm')">2017-08-14
+                                            <ul>Lövenich, Daniela, Jülich, 91 IK 308/11</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/11/0091_IK00308_11/2017_08_14__11_03_59_Restschuldbefreiung.htm')">2017-08-14
+                                            <ul>Lövenich, Daniela, Jülich, 91 IK 308/11</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0092_IK00031_17/2017_08_10__08_55_17_Entscheidungen_im_Verfahren.htm')">2017-08-10
+                                            <ul>Kurth, Helene, Jülich, 92 IK 31/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0092_IK00031_17/2017_08_10__08_55_08_Entscheidungen_im_Verfahren_mit_Termine.htm')">2017-08-10
+                                            <ul>Kurth, Helene, Jülich, 92 IK 31/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0092_IK00031_17/2017_08_10__08_56_24_Verwalter_Treuhaender_Verteilungsverzeichnis.htm')">2017-08-10
+                                            <ul>Kurth, Helene, Jülich, 92 IK 31/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0091_IK00052_17/2017_08_09__09_37_04_Entscheidungen_im_Verfahren_mit_Termine.htm')">2017-08-09
+                                            <ul>Krieger, Karina Maria Katharina, Jülich, 91 IK 52/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0091_IK00052_17/2017_08_09__09_37_09_Entscheidungen_im_Verfahren.htm')">2017-08-09
+                                            <ul>Krieger, Karina Maria Katharina, Jülich, 91 IK 52/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0091_IK00052_17/2017_08_09__09_38_07_Verwalter_Treuhaender_Verteilungsverzeichnis.htm')">2017-08-09
+                                            <ul>Krieger, Karina Maria Katharina, Jülich, 91 IK 52/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/11/0092_IK00238_11/2017_08_09__09_44_16_Restschuldbefreiung.htm')">2017-08-09
+                                            <ul>Lövenich, Paul, Jülich, 92 IK 238/11</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/11/0092_IK00238_11/2017_08_09__09_44_21_Restschuldbefreiung.htm')">2017-08-09
+                                            <ul>Lövenich, Paul, Jülich, 92 IK 238/11</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0093_IN00155_17/2017_08_09__08_06_28_Eroeffnung_Insolvenzverfahren.htm')">2017-08-09
+                                            <ul>Meisinger, Waldemar, Jülich, 93 IN 155/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0093_IN00155_17/2017_08_09__08_06_32_Restschuldbefreiung.htm')">2017-08-09
+                                            <ul>Meisinger, Waldemar, Jülich, 93 IN 155/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0093_IK00260_17/2017_08_09__07_31_37_Restschuldbefreiung.htm')">2017-08-09
+                                            <ul>Schleicher, Dirk, Jülich, 93 IK 260/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/17/0093_IK00260_17/2017_08_09__07_31_31_Eroeffnung_Insolvenzverfahren.htm')">2017-08-09
+                                            <ul>Schleicher, Dirk, Jülich, 93 IK 260/17</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/16/0093_IK00269_16/2017_08_08__06_59_32_Bestimmung_Termine.htm')">2017-08-08
+                                            <ul>Koglin, Dirk, Jülich, 93 IK 269/16</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/14/0093_IN00142_14/2017_08_08__08_46_32_Bestimmung_Termine.htm')">2017-08-08
+                                            <ul>Konradi, Friedrich, Jülich, 93 IN 142/14</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/16/0091_IK00201_16/2017_08_08__09_14_39_Verwalter_Treuhaender_Verteilungsverzeichnis.htm')">2017-08-08
+                                            <ul>Lammertz, Josef, Jülich, 91 IK 201/16</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/16/0091_IK00201_16/2017_08_08__09_12_07_Entscheidungen_im_Verfahren.htm')">2017-08-08
+                                            <ul>Lammertz, Josef, Jülich, 91 IK 201/16</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/16/0091_IK00201_16/2017_08_08__09_11_59_Entscheidungen_im_Verfahren_mit_Termine.htm')">2017-08-08
+                                            <ul>Lammertz, Josef, Jülich, 91 IK 201/16</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <b>
+                                    <LI>
+                                        <A HREF="javascript:NeuFenster('/cgi-bin/bl_aufruf.pl?PHPSESSID=ef340c6e3fe00569a019c54126222179&datei=gerichte/nw/agaachen/16/0091_IK00495_16/2017_08_07__06_50_22_Bestimmung_Termine.htm')">2017-08-07
+                                            <ul>Tosun, Murat, Jülich, 91 IK 495/16</ul>
+                                            <p>
+                                        </A></LI>
+                                </b>
+                                <p><!-- BODY --><a href="#Start"><b>Zur&uuml;ck zur Suche</b></a><br><br>&nbsp;<br></p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+        <!-- Ende Tabellenrahmen -->
+
+    </div><!-- ende Inhalt -->
+    <div id="addinfo"><!-- ende Addinfo -->
+        <h3>Weitere Infos</h3>
+        <ul>
+            <li class="publication"><a target=_blank href="http://www.justiz.de">Justizportal des Bundes und der
+                Länder</a></li>
+            <li class="publication"><a target=_blank href="http://www.justiz.de/OrtsGerichtsverzeichnis/index.php">Orts-
+                und Gerichtsverzeichnis</a></li>
+            <li class="publication"><a target=_blank
+                                       href="https://e-justice.europa.eu/external.do?idTaxonomy=246&plang=de&init=true">Suche
+                im europäischen Insolvenzportal</a></li>
+        </ul>
+    </div><!-- ende Addinfo -->
+    <div class="screen" id="footer"> <!-- Footer -->
+        <p>
+            <nobr><a href="javascript:window.print()">Seite drucken</a>&nbsp;.&nbsp;<a href="#inhalt">zum Anfang</a>
+            </nobr>
+        </p>
+    </div> <!-- Ende Footer -->
+</div><!-- ende Container -->
+</body>
+</html>

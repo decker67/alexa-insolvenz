@@ -1,0 +1,32 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "GetLunchCard",
+      "samples": [
+        "GetLunchCard frag mensa jülich vom {date}",
+        "GetLunchCard frag mensa jülich",
+        "GetLunchCard frag mensa jülich am {date}",
+        "GetLunchCard frag mensa jülich für {date}"
+      ],
+      "slots": [
+        {
+          "name": "date",
+          "type": "AMAZON.DATE",
+          "samples": []
+        }
+      ]
+    }
+  ]
+}

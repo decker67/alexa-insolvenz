@@ -1,0 +1,13 @@
+in {town}
+Stadt {town}
+
+eröffnet am {date}
+am {date}
+vom {date}
+Datum {date}
+
+für {name}
+von {name}
+Person {name}
+Firma {name}
+

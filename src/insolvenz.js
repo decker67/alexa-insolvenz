@@ -5,7 +5,8 @@ const https = require("https");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-exports = Object.assign(exports, { initialise, whoIsInsolvent, isNameInsolvent, whoIsInsolventFromDate });
+exports = Object.assign(exports,
+    { initialise, whoIsInsolvent, isNameInsolvent, whoIsInsolventFromDate, whoIsInsolventInTown });
 
 let insolvenzUrl = 'https://www.insolvenzbekanntmachungen.de/cgi-bin/bl_suche.pl';
 let fromFile;
@@ -17,7 +18,7 @@ function initialise(fileUrl) {
     insolvenzUrl = fileUrl || insolvenzUrl;
 }
 
-function whoIsInsolvent(callback, name = '', date = '') {
+function whoIsInsolvent(callback, name = '', date = '', town = '') {
     //"use strict";
     getHTMLPageInsolvenz((data) => {
         const dom = new JSDOM(data);
@@ -25,7 +26,7 @@ function whoIsInsolvent(callback, name = '', date = '') {
             .map((node) => node.textContent);
         //console.log('dom', all);
         callback(all);
-    }, name, date);
+    }, name, date, town);
 }
 
 function isNameInsolvent(name, callback) {
@@ -34,6 +35,10 @@ function isNameInsolvent(name, callback) {
 
 function whoIsInsolventFromDate(date, callback) {
     return whoIsInsolvent(callback, '', date);
+}
+
+function whoIsInsolventInTown(town, callback) {
+    return whoIsInsolvent(callback, '', '', town);
 }
 
 function getHTMLPageInsolvenz(callback, name = '', date = '') {
@@ -47,7 +52,7 @@ function getInsolvenzDataFromFile(callback) {
         (console.log('ERROR', error), callback()) : callback(data) );
 }
 
-function getInsolvenzDataFromWeb(callback, name, date) {
+function getInsolvenzDataFromWeb(callback, name, date, town) {
     //"use strict";
 
     const url = new URL(insolvenzUrl);
@@ -60,7 +65,7 @@ function getInsolvenzDataFromWeb(callback, name, date) {
         Datum1: date,
         Datum2: date,
         Name: name,
-        Sitz: '',
+        Sitz: town,
         Abteilungsnr: '',
         Registerzeichen: '--',
         Lfdnr: '',

@@ -27,50 +27,37 @@ exports.handler = function (event, context) {
     alexa.execute();
 };
 
-/*
-in {town}
-Stadt {town}
-
-eröffnet am {date}
-am {date}
-vom {date}
-Datum {date}
-
-für {name}
-von {name}
-Person {name}
-Firma {name}
- */
 const handlers = {
     'LaunchRequest': function () {
-        this.emit('GetInsolvenz');
+        this.emit('WhoIsInsolvent');
     },
 
-    'GetInsolvenz': function () {
-
+    'WhoIsInsolvent': function () {
         insolvenz.initialise();
-
         insolvenz.whoIsInsolvent((insolvenzData) => {
+            createSpeechOutput(insolvenzData);
         });
+    },
 
-        insolvenz.isNameInsolvent(name, (insolvenzData) => {
-        });
-
+    'WhoIsInsolventFromDate': function () {
+        insolvenz.initialise();
         insolvenz.whoIsInsolventFromDate(date, (insolvenzData) => {
-
+            createSpeechOutput(insolvenzData);
         });
+    },
 
-        let speechOutput;
-        let result = mensaplan.lunchCard(dateValue);
-        if (!result) {
-            speechOutput = this.t('NOT_FOUND_MESSAGE');
-        } else {
-            speechOutput = createSpeechOutput(this, result);
-        }
+    'IsNameInsolvent': function () {
+        insolvenz.initialise();
+        insolvenz.isNameInsolvent(name, (insolvenzData) => {
+            createSpeechOutput(insolvenzData);
+        });
+    },
 
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
-
-
+    'WhoIsInsolventInTown': function () {
+        insolvenz.initialise();
+        insolvenz.whoIsInsolventInTown(town, (insolvenzData) => {
+            createSpeechOutput(insolvenzData);
+        });
     },
 
     'AMAZON.HelpIntent': function () {
@@ -87,6 +74,17 @@ const handlers = {
         this.emit(':tell', this.t(STOP_MESSAGE));
     }
 };
+
+function createSpeechOutput(insolvenzData) {
+    let speechOutput;
+    if (!insolvenzData) {
+        speechOutput = this.t('NOT_FOUND_MESSAGE');
+    } else {
+        speechOutput = insolvenzData.toString();
+    }
+    console.log(speechOutput);
+    this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
+}
 
 // function createSpeechOutput(handlers, result) {
 //     let output = handlers.t('INTRO_MESSAGE');

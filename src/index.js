@@ -1,19 +1,33 @@
 'use strict';
 const Alexa = require('alexa-sdk');
 const insolvenz = require('insolvenz');
-const APP_ID = '';
+const speech = require('speech');
+const APP_ID = 'amzn1.ask.skill.fb607e9d-e998-46f2-8b02-1d2d25d2513b';
 
 const languageStrings = {
     'de-DE': {
         'translation': {
             'SKILL_NAME': 'insolvenz',
-            'NOT_FOUND_MESSAGE': 'Keinen Eintrag gefunden.',
+            'NOT_FOUND_MESSAGE': 'Ich habe keinen Eintrag gefunden. ',
+            'FOUND_MESSAGE': 'Ich habe %d Einträge gefunden. <break time="1s" ',
+            'QUESTION_READ_MESSAGE': 'Soll ich Dir die Einträge vorlesen?',
             'INTRO_MESSAGE': 'Ich habe die folgenden Einträge gefunden. <break time="1s"/>',
-            'EXTRO_MESSAGE': 'Ende der Liste.',
 
-            'HELP_MESSAGE': "Du kannst mich nach Insolvenzdaten fragen.",
-            'HELP_REPROMPT': "Was möchtest Du wissen?",
-            'STOP_MESSAGE': 'Tschüss'
+            'PERSON_MESSAGE': 'Eintrag von Person ',
+            'TOWN_MESSAGE': 'in Stadt ',
+            'TREATMENT_MESSAGE': 'hat Verfahrensnummer ',
+
+            'FIRM_MESSAGE': 'Eintrag von Firma ',
+            'REGISTER_MESSAGE': 'mit Handelsregisternummer ',
+            'COURT_MESSAGE': 'Gericht ',
+
+            'ENTRY_MESSAGE': 'Eintrag ',
+
+            'EXTRO_MESSAGE': 'Ende der Liste. ',
+
+            'HELP_MESSAGE': "Du kannst mich nach Insolvenzdaten fragen. ",
+            'HELP_REPROMPT': "Was möchtest Du wissen? ",
+            'STOP_MESSAGE': 'Tschüss '
         }
     }
 };
@@ -35,28 +49,37 @@ const handlers = {
     'WhoIsInsolvent': function () {
         insolvenz.initialise();
         insolvenz.whoIsInsolvent((insolvenzData) => {
-            createSpeechOutput(insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
 
     'WhoIsInsolventFromDate': function () {
+        const dateFromRequest = this.event.request.intent.slots.date.value;
+        const dateParts = dateFromRequest.split('-');
+        const date = dateParts[2] + '.' + dateParts[1] + '.' + dateParts[0];
         insolvenz.initialise();
         insolvenz.whoIsInsolventFromDate(date, (insolvenzData) => {
-            createSpeechOutput(insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
 
     'IsNameInsolvent': function () {
+        const name = this.event.request.intent.slots.name.value;
         insolvenz.initialise();
         insolvenz.isNameInsolvent(name, (insolvenzData) => {
-            createSpeechOutput(insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
 
     'WhoIsInsolventInTown': function () {
+        const town = this.event.request.intent.slots.town.value;
         insolvenz.initialise();
         insolvenz.whoIsInsolventInTown(town, (insolvenzData) => {
-            createSpeechOutput(insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
 
@@ -73,31 +96,7 @@ const handlers = {
     'AMAZON.StopIntent': function () {
         this.emit(':tell', this.t(STOP_MESSAGE));
     }
+
 };
 
-function createSpeechOutput(insolvenzData) {
-    let speechOutput;
-    if (!insolvenzData) {
-        speechOutput = this.t('NOT_FOUND_MESSAGE');
-    } else {
-        speechOutput = insolvenzData.toString();
-    }
-    console.log(speechOutput);
-    this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
-}
 
-// function createSpeechOutput(handlers, result) {
-//     let output = handlers.t('INTRO_MESSAGE');
-//
-//     result.forEach(menue => {
-//         const category = menue.category;
-//         const description = menue.description;
-//         const price = menue.price;
-//         output += category + ', ' + description + ', ' + (price ? price : '');
-//
-//         output += '<break time="1s"/>';
-//     });
-//     output += '<break time="500ms"/>' + handlers.t('EXTRO_MESSAGE');
-//
-//     return output;
-// }

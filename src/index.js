@@ -8,10 +8,9 @@ const languageStrings = {
     'de-DE': {
         'translation': {
             'SKILL_NAME': 'insolvenz',
-            'NOT_FOUND_MESSAGE': 'Ich habe keinen Eintrag gefunden. ',
-            'FOUND_MESSAGE': 'Ich habe %d Einträge gefunden. <break time="1s"/> ',
+            'NOT_FOUND_MESSAGE': 'Ich habe keinen Eintrag für %s gefunden. ',
+            'FOUND_MESSAGE': 'Ich habe %d Einträge für %s gefunden. <break time="1s"/> ',
             'QUESTION_READ_MESSAGE': 'Soll ich Dir die Einträge vorlesen?',
-            'INTRO_MESSAGE': 'Ich habe die folgenden Einträge gefunden. <break time="1s"/>',
 
             'PERSON_MESSAGE': 'Eintrag von Person ',
             'TOWN_MESSAGE': 'in Stadt ',
@@ -65,7 +64,7 @@ const handlers = {
         insolvenz.initialise();
         insolvenz.whoIsInsolventFromDate(date, (insolvenzData) => {
             // console.log('before speechOutput');
-            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, dateFromRequest, insolvenzData);
             // console.log('speechOutput', speechOutput);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
@@ -76,7 +75,7 @@ const handlers = {
         const name = this.event.request.intent.slots.name.value;
         insolvenz.initialise();
         insolvenz.isNameInsolvent(name, (insolvenzData) => {
-            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, name, insolvenzData);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
@@ -86,7 +85,7 @@ const handlers = {
         const town = this.event.request.intent.slots.town.value;
         insolvenz.initialise();
         insolvenz.whoIsInsolventInTown(town, (insolvenzData) => {
-            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            const speechOutput = speech.createSpeechOutput(this, town, insolvenzData);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },

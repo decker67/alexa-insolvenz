@@ -123,7 +123,7 @@ function stringify(postRequestParameter) {
 
 function extractData(allPlain) {
     "use strict";
-    console.log('allPlain', allPlain);
+    //console.log('allPlain', allPlain);
     return _.map(allPlain, plainEntry => {
         //console.log('plainEntry', plainEntry);
         const plainEntryParts = plainEntry.split(',');

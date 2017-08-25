@@ -1,5 +1,6 @@
-const insolvenz = require('../src/insolvenz');
 const { expect } = require('chai');
+
+const insolvenz = require('../src/insolvenz');
 
 describe('ask insolvenz', () => {
 
@@ -34,6 +35,7 @@ describe('ask insolvenz', () => {
 
     before((done) => {
         "use strict";
+        // without parameter to test live system and get some data
         insolvenz.initialise('./test/data/insolventInJuelich.html');
         done();
     });

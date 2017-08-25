@@ -1,7 +1,7 @@
 'use strict';
 const Alexa = require('alexa-sdk');
-const insolvenz = require('insolvenz');
-const speech = require('speech');
+const insolvenz = require('./insolvenz');
+const speech = require('./speech');
 const APP_ID = 'amzn1.ask.skill.fb607e9d-e998-46f2-8b02-1d2d25d2513b';
 
 const languageStrings = {
@@ -9,7 +9,7 @@ const languageStrings = {
         'translation': {
             'SKILL_NAME': 'insolvenz',
             'NOT_FOUND_MESSAGE': 'Ich habe keinen Eintrag gefunden. ',
-            'FOUND_MESSAGE': 'Ich habe %d Einträge gefunden. <break time="1s" ',
+            'FOUND_MESSAGE': 'Ich habe %d Einträge gefunden. <break time="1s"/> ',
             'QUESTION_READ_MESSAGE': 'Soll ich Dir die Einträge vorlesen?',
             'INTRO_MESSAGE': 'Ich habe die folgenden Einträge gefunden. <break time="1s"/>',
 
@@ -32,10 +32,11 @@ const languageStrings = {
     }
 };
 
-exports.handler = function (event, context) {
-    const alexa = Alexa.handler(event, context);
+const requestHandler = function(event, context, callback) {
+    //console.log('event', JSON.stringify(event));
+    //console.log('context', JSON.stringify(context));
+    const alexa = Alexa.handler(event, context, callback);
     alexa.APP_ID = APP_ID;
-    // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
@@ -43,10 +44,12 @@ exports.handler = function (event, context) {
 
 const handlers = {
     'LaunchRequest': function () {
+        // console.log('LaunchRequest');
         this.emit('WhoIsInsolvent');
     },
 
     'WhoIsInsolvent': function () {
+        // console.log('WhoIsInsolvent');
         insolvenz.initialise();
         insolvenz.whoIsInsolvent((insolvenzData) => {
             const speechOutput = speech.createSpeechOutput(this, insolvenzData);
@@ -55,17 +58,21 @@ const handlers = {
     },
 
     'WhoIsInsolventFromDate': function () {
+        // console.log('WhoIsInsolventFromDate');
         const dateFromRequest = this.event.request.intent.slots.date.value;
         const dateParts = dateFromRequest.split('-');
         const date = dateParts[2] + '.' + dateParts[1] + '.' + dateParts[0];
         insolvenz.initialise();
         insolvenz.whoIsInsolventFromDate(date, (insolvenzData) => {
+            // console.log('before speechOutput');
             const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            // console.log('speechOutput', speechOutput);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
 
-    'IsNameInsolvent': function () {
+    'IsNameInsolvent': function() {
+        // console.log('IsNameInsolvent');
         const name = this.event.request.intent.slots.name.value;
         insolvenz.initialise();
         insolvenz.isNameInsolvent(name, (insolvenzData) => {
@@ -75,6 +82,7 @@ const handlers = {
     },
 
     'WhoIsInsolventInTown': function () {
+        // console.log('\'WhoIsInsolventInTown');
         const town = this.event.request.intent.slots.town.value;
         insolvenz.initialise();
         insolvenz.whoIsInsolventInTown(town, (insolvenzData) => {
@@ -84,19 +92,20 @@ const handlers = {
     },
 
     'AMAZON.HelpIntent': function () {
-        const speechOutput = this.t(HELP_MESSAGE);
-        const reprompt = this.t(HELP_REPROMPT);
-        this.emit(':ask', speechOutput, reprompt);
+        this.emit(':ask', this.t(HELP_MESSAGE), this.t(HELP_REPROMPT));
     },
-
     'AMAZON.CancelIntent': function () {
         this.emit(':tell', this.t(STOP_MESSAGE));
     },
-
     'AMAZON.StopIntent': function () {
         this.emit(':tell', this.t(STOP_MESSAGE));
+    },
+    'Unhandled': function() {
+        this.emit(':ask',
+            'Entschuldigung, ich habe Dich nicht verstanden.',
+            'Kannst Du das nochmal wiederholen?');
     }
-
 };
 
 
+exports.handler = requestHandler;

@@ -77,7 +77,7 @@ function getInsolvenzDataFromWeb(callback, name, date, town) {
         Registergericht: '--+keine+Angabe+--',
         Registernummer: '',
         Gegenstand: '--+Alle+Bekanntmachungen+innerhalb+des+Verfahrens+--',
-        matchesperpage: 100,
+        matchesperpage: 10,
         page: 1,
         sortedby: 'Datum'
     });
@@ -123,7 +123,7 @@ function stringify(postRequestParameter) {
 
 function extractData(allPlain) {
     "use strict";
-    //console.log('allPlain', allPlain);
+    console.log('allPlain', allPlain);
     return _.map(allPlain, plainEntry => {
         //console.log('plainEntry', plainEntry);
         const plainEntryParts = plainEntry.split(',');

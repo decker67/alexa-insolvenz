@@ -173,7 +173,7 @@ describe('ask insolvenz', () => {
         });
     });
 
-    xit('is <name> insolvent', (done) => {
+    it('is <name> insolvent', (done) => {
         const name = 'Bittmann';
         insolvenz.isNameInsolvent(name, (insolvenzData) => {
             expect(insolvenzData).to.deep.equal(testDataInsolvenz);
@@ -181,7 +181,7 @@ describe('ask insolvenz', () => {
         });
     });
 
-    xit('is insolvent from <date>', (done) => {
+    it('is insolvent from <date>', (done) => {
         const date = '19.08.2017';
         insolvenz.whoIsInsolventFromDate(date, (insolvenzData) => {
             expect(insolvenzData).to.deep.equal(testDataInsolvenz);

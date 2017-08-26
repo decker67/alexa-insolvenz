@@ -1,11 +1,12 @@
 const { expect } = require('chai');
 const speech = require('../src/speech');
 
-const mock_handlers = {
-    't': key => key + ' '
+const handlers = {
+    t: (key) => key + ' '
 };
 
-describe('speech ', () => {
+describe('speech ', function() {
+
 
     before(() => {
         "use strict";
@@ -18,8 +19,7 @@ describe('speech ', () => {
             "treatment": "91 IK 52/17",
             "type": "person"
         }];
-
-        const output = speech.createSpeechOutput(mock_handlers, data);
+        const output = speech.createSpeechOutput.call(handlers, data);
         expect(output).to.include(data[0].name);
         expect(output).to.include(data[0].town);
         expect(output).to.include(data[0].treatment);
@@ -35,7 +35,7 @@ describe('speech ', () => {
             "type": "firm"
         }];
 
-        const output = speech.createSpeechOutput(mock_handlers, data);
+        const output = speech.createSpeechOutput.call(handlers, data);
         expect(output).to.include(data[0].court);
         expect(output).to.include(data[0].name);
         expect(output).to.include(data[0].register);
@@ -49,7 +49,7 @@ describe('speech ', () => {
             "type": "?"
         }];
 
-        const output = speech.createSpeechOutput(mock_handlers, data);
+        const output = speech.createSpeechOutput.call(handlers, data);
         expect(output).to.include(data[0].all);
     });
 

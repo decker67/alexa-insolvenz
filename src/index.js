@@ -4,39 +4,16 @@ const insolvenz = require('./insolvenz');
 const speech = require('./speech');
 const APP_ID = 'amzn1.ask.skill.fb607e9d-e998-46f2-8b02-1d2d25d2513b';
 
-const languageStrings = {
-    'de-DE': {
-        'translation': {
-            'SKILL_NAME': 'insolvenz',
-            'NOT_FOUND_MESSAGE': 'Ich habe keinen Eintrag für %s gefunden. ',
-            'FOUND_MESSAGE': 'Ich habe %d Einträge für %s gefunden. <break time="1s"/> ',
-            'QUESTION_READ_MESSAGE': 'Soll ich Dir die Einträge vorlesen?',
-
-            'PERSON_MESSAGE': 'Eintrag von Person ',
-            'TOWN_MESSAGE': 'in Stadt ',
-            'TREATMENT_MESSAGE': 'hat Verfahrensnummer ',
-
-            'FIRM_MESSAGE': 'Eintrag von Firma ',
-            'REGISTER_MESSAGE': 'mit Handelsregisternummer ',
-            'COURT_MESSAGE': 'Gericht ',
-
-            'ENTRY_MESSAGE': 'Eintrag ',
-
-            'EXTRO_MESSAGE': 'Ende der Liste. ',
-
-            'HELP_MESSAGE': "Du kannst mich nach Insolvenzdaten fragen. ",
-            'HELP_REPROMPT': "Was möchtest Du wissen? ",
-            'STOP_MESSAGE': 'Tschüss '
-        }
-    }
-};
-
 const requestHandler = function(event, context, callback) {
-    //console.log('event', JSON.stringify(event));
-    //console.log('context', JSON.stringify(context));
+    console.log('event', JSON.stringify(event));
+    console.log('context', JSON.stringify(context));
+    const applicationId = event.session.application.applicationId;
+    if (applicationId !== APP_ID) {
+        callback('Ungültige Application ID');
+    }
     const alexa = Alexa.handler(event, context, callback);
     alexa.APP_ID = APP_ID;
-    alexa.resources = languageStrings;
+    alexa.resources = speech.languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
@@ -51,7 +28,7 @@ const handlers = {
         // console.log('WhoIsInsolvent');
         insolvenz.initialise();
         insolvenz.whoIsInsolvent((insolvenzData) => {
-            const speechOutput = speech.createSpeechOutput(this, insolvenzData);
+            const speechOutput = speech.createSpeechOutput.call(this, insolvenzData);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
@@ -64,7 +41,7 @@ const handlers = {
         insolvenz.initialise();
         insolvenz.whoIsInsolventFromDate(date, (insolvenzData) => {
             // console.log('before speechOutput');
-            const speechOutput = speech.createSpeechOutput(this, dateFromRequest, insolvenzData);
+            const speechOutput = speech.createSpeechOutput.call(this, insolvenzData, dateFromRequest);
             // console.log('speechOutput', speechOutput);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
@@ -75,7 +52,7 @@ const handlers = {
         const name = this.event.request.intent.slots.name.value;
         insolvenz.initialise();
         insolvenz.isNameInsolvent(name, (insolvenzData) => {
-            const speechOutput = speech.createSpeechOutput(this, name, insolvenzData);
+            const speechOutput = speech.createSpeechOutput.call(this, insolvenzData, name);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
@@ -85,7 +62,7 @@ const handlers = {
         const town = this.event.request.intent.slots.town.value;
         insolvenz.initialise();
         insolvenz.whoIsInsolventInTown(town, (insolvenzData) => {
-            const speechOutput = speech.createSpeechOutput(this, town, insolvenzData);
+            const speechOutput = speech.createSpeechOutput.call(this, insolvenzData, town);
             this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), speechOutput);
         });
     },
@@ -106,5 +83,10 @@ const handlers = {
     }
 };
 
+function isSlotValid(request, slotName){
+    const slot = request.intent.slots[slotName];
+    //console.log("request", JSON.stringify(request));
+    return (slot && slot.value) ? slot.value : false;
+}
 
 exports.handler = requestHandler;
